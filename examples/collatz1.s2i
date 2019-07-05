@@ -1,0 +1,9 @@
+# Collatz sequence
+# Example program from <http://esolangs.org/wiki/SMETANA_To_Infinity!>
+# Does not produce output so turn on 'trace' to observe how the
+# sequence of steps executed corresponds to the iterated Collatz function.
+
+Step n. Go to step 3n + 1.
+Step 2n. Go to step n.
+Step 1. Go to step 7.
+Step 4. Stop.

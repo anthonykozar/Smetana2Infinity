@@ -1,0 +1,19 @@
+# Outputs the Collatz sequence starting with
+# the postive number (x-1)/2 where x is the 
+# target of the Goto statement in Step 1.
+
+# Each postive number has two steps associated
+# with it starting with Steps 3 & 4 for 1.
+# Odd numbers map to these steps:
+Step 2n + 1. Output character n.
+Step 2n + 2. Go to step 6n + 3.
+# Even numbers map to these:
+Step 4n + 1. Output character 2n.
+Step 4n + 2. Go to step 2n + 1.
+
+# Start with 7 (step 15)
+# To start with x, change target to 2x+1.
+Step 1. Go to step 15.
+
+# Stop when the sequence reaches 1
+Step 4. Stop.

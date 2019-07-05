@@ -1,0 +1,53 @@
+# Test each legal instruction form allowed by the grammar
+
+Step n. Stop.
+Step n. Go to step 1.
+Step n. Go to step n.
+Step n. Go to step n + 2.
+Step n. Go to step 2n.
+Step n. Go to step 3n + 1.
+
+Step n. Swap step 1 with step 13.
+Step n. Swap step n with step 13.
+Step n. Swap step n + 2 with step 13.
+Step n. Swap step 2n with step 13.
+Step n. Swap step 3n + 1 with step 13.
+
+Step n. Swap step 1 with step n.
+Step n. Swap step n with step n.
+Step n. Swap step n + 2 with step n.
+Step n. Swap step 2n with step n.
+Step n. Swap step 3n + 1 with step n.
+
+Step n. Swap step 1 with step n+27.
+Step n. Swap step n with step n+27.
+Step n. Swap step n + 2 with step n+27.
+Step n. Swap step 2n with step n+27.
+Step n. Swap step 3n + 1 with step n+27.
+
+Step n. Swap step 1 with step 15n.
+Step n. Swap step n with step 15n.
+Step n. Swap step n + 2 with step 15n.
+Step n. Swap step 2n with step 15n.
+Step n. Swap step 3n + 1 with step 15n.
+
+Step n. Swap step 1 with step 25 n + 0.
+Step n. Swap step n with step 25 n + 0.
+Step n. Swap step n + 2 with step 25 n + 0.
+Step n. Swap step 2n with step 25 n + 0.
+Step n. Swap step 3n + 1 with step 25 n + 0.
+
+Step n. Output character 0.
+Step n. Output character n.
+Step n. Output character n + 0.
+Step n. Output character 0 n.
+Step n. Output character 0n + 10.
+
+Step 2n. Go to step n.
+
+Step 1. Go to step 3.
+Step 2. Stop.
+Step 3. Swap step 4 with step 5.
+Step 4. Swap step 2 with step 5.
+Step 5. Output character 65.
+Step 6. Go to step 10.
