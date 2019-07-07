@@ -1,3 +1,5 @@
+#!/usr/local/bin/python2
+
 # Smetana2Infinity.py
 
 # An interpreter for the language "SMETANA To Infinity!"
@@ -11,9 +13,7 @@
 # June 22-26 and July 4-5, 2019
 
 import sys
-import re
-
-filename = "collatz2.s2i"
+import argparse
 
 def printerr(message, line, linenum):
     sys.stderr.write("Error: " + message + " on line " + linenum + ":\n")
@@ -380,10 +380,10 @@ outINTEGER = 1
 outASCII = 2
 outUNICODE = 3
 
-def execute(program, outformat = outINTEGER, trace = False):
+def execute(program, outformat = outINTEGER, startstep = 1, trace = False):
     steps = program[NUMDSTEPS]     # dictionary of numbered steps
     # exprsteps = program[EXPRSTEPS] # list of expression steps
-    curstep = 1
+    curstep = startstep
     done = False
     while not done:
         step = findstep(curstep, program)
@@ -442,7 +442,19 @@ def printinstruction(instr):
         print OUTPUT, instr[ARG1]
 
 # MAIN program
-f = open(filename)
+
+# set up commandline argument handling
+parser = argparse.ArgumentParser(description="An interpreter for the language SMETANA To Infinity!")
+parser.add_argument("program", help="filename of the STI program to run")
+parser.add_argument("-s", "--start", help="begin execution with step N", type=int, default=1, metavar='N')
+parser.add_argument("-t", "--trace", help="trace program execution", action="store_true")
+outgrp = parser.add_argument_group("output options", "Set the behavior of the 'Output character' statement.")
+outgrp.add_argument("-a", "--ascii", help="output ASCII characters", dest='outformat', action='store_const', const=outASCII, default=outINTEGER)
+outgrp.add_argument("-i", "--integers", help="output integers (default)", dest='outformat', action='store_const', const=outINTEGER, default=outINTEGER)
+outgrp.add_argument("-u", "--unicode", help="output Unicode characters", dest='outformat', action='store_const', const=outUNICODE, default=outINTEGER)
+args = parser.parse_args()
+
+f = open(args.program)
 try:
     linenum = 1
     alltokens = []
@@ -461,4 +473,4 @@ finally:
 program = parse(alltokens)
 # print program
 
-execute(program, outINTEGER, False)
+execute(program, args.outformat, args.start, args.trace)
