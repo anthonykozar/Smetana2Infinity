@@ -1,0 +1,85 @@
+# Prime number sieve
+# Finds primes up to 100.
+
+# Steps 2-100 represent the positive integers to test.
+# A step is changed to a NOP after it has been identified as a 
+# prime or ruled out as composite.
+Step n. Go to step 10000n.
+
+# Start search with step 2.
+Step 1. Swap step 1 with step 1.
+
+# Steps 102-9999 are NOPs to be swapped with steps 2-100.
+Step n + 100. Swap step 1 with step 1.
+
+# All steps 10000+ not explicitly defined below are also NOPs.
+Step n + 10000. Swap step n + 10000 with step n + 10000.
+
+# A 10000n to 10000n+101 block is called when n is found to be prime.
+# To keep multiple step number expressions from evaluating to the same
+# n, these blocks must be spaced at least every MAX^2 steps where MAX
+# is the largest number to be checked for primeness.
+
+# First output the number and change step n to a NOP.
+Step 10000n. Output character n.
+Step 10000n + 1. Swap step n with step n + 100.
+
+# Multiples of step n are composite, so change them to NOPs.
+# Some steps between 2-100 will be swapped multiple times, so
+# for each base n a different set of NOP steps are used.
+# A line (10000+m)n is needed below for each m up to MAX/2.
+Step 10002n. Swap step 2n with step 102n + 100.
+Step 10003n. Swap step 3n with step 103n + 100.
+Step 10004n. Swap step 4n with step 104n + 100.
+Step 10005n. Swap step 5n with step 105n + 100.
+Step 10006n. Swap step 6n with step 106n + 100.
+Step 10007n. Swap step 7n with step 107n + 100.
+Step 10008n. Swap step 8n with step 108n + 100.
+Step 10009n. Swap step 9n with step 109n + 100.
+Step 10010n. Swap step 10n with step 110n + 100.
+Step 10011n. Swap step 11n with step 111n + 100.
+Step 10012n. Swap step 12n with step 112n + 100.
+Step 10013n. Swap step 13n with step 113n + 100.
+Step 10014n. Swap step 14n with step 114n + 100.
+Step 10015n. Swap step 15n with step 115n + 100.
+Step 10016n. Swap step 16n with step 116n + 100.
+Step 10017n. Swap step 17n with step 117n + 100.
+Step 10018n. Swap step 18n with step 118n + 100.
+Step 10019n. Swap step 19n with step 119n + 100.
+Step 10020n. Swap step 20n with step 120n + 100.
+Step 10021n. Swap step 21n with step 121n + 100.
+Step 10022n. Swap step 22n with step 122n + 100.
+Step 10023n. Swap step 23n with step 123n + 100.
+Step 10024n. Swap step 24n with step 124n + 100.
+Step 10025n. Swap step 25n with step 125n + 100.
+Step 10026n. Swap step 26n with step 126n + 100.
+Step 10027n. Swap step 27n with step 127n + 100.
+Step 10028n. Swap step 28n with step 128n + 100.
+Step 10029n. Swap step 29n with step 129n + 100.
+Step 10030n. Swap step 30n with step 130n + 100.
+Step 10031n. Swap step 31n with step 131n + 100.
+Step 10032n. Swap step 32n with step 132n + 100.
+Step 10033n. Swap step 33n with step 133n + 100.
+Step 10034n. Swap step 34n with step 134n + 100.
+Step 10035n. Swap step 35n with step 135n + 100.
+Step 10036n. Swap step 36n with step 136n + 100.
+Step 10037n. Swap step 37n with step 137n + 100.
+Step 10038n. Swap step 38n with step 138n + 100.
+Step 10039n. Swap step 39n with step 139n + 100.
+Step 10040n. Swap step 40n with step 140n + 100.
+Step 10041n. Swap step 41n with step 141n + 100.
+Step 10042n. Swap step 42n with step 142n + 100.
+Step 10043n. Swap step 43n with step 143n + 100.
+Step 10044n. Swap step 44n with step 144n + 100.
+Step 10045n. Swap step 45n with step 145n + 100.
+Step 10046n. Swap step 46n with step 146n + 100.
+Step 10047n. Swap step 47n with step 147n + 100.
+Step 10048n. Swap step 48n with step 148n + 100.
+Step 10049n. Swap step 49n with step 149n + 100.
+Step 10050n. Swap step 50n with step 150n + 100.
+
+# Find the next non-composite number.
+Step 10000n + 101. Go to step n + 1.
+
+# Stop when we pass 100.
+Step 101. Stop.
