@@ -20,7 +20,7 @@ def printerr(message, line, linenum):
     sys.stderr.write("   " + line + '\n')
 
 def parsererr(message, stepnum, tokens, tokidx):
-    sys.stderr.write("Error: " + message + " in step " + str(stepnum) + ":\n")
+    sys.stderr.write("Error: " + message + " in step " + expr2str(stepnum) + ":\n")
     # print up to 10 tokens for context
     lastidx = min(tokidx + 10, len(tokens))
     sys.stderr.write("   " + " ".join(map(str, tokens[tokidx:lastidx])) + '\n')
@@ -272,7 +272,7 @@ def parse(tokens):
             # OUTPUT instruction
             elif tokens[idx] == OUTPUT:
                 if tokens[idx+1] != CHAR:
-                    parsererr("Missing 'Character' after 'OUTPUT'", curstep, tokens, stepidx)
+                    parsererr("Missing 'Character' after 'Output'", curstep, tokens, stepidx)
                     return False
                 idx += 2
                 # parse number/expression to output
@@ -282,7 +282,11 @@ def parse(tokens):
                     parsererr("Illegal 'n'-expression in a numbered step", curstep, tokens, stepidx)
                     return False
                 curinstr = (iOUTP, expr, None)
-
+            
+            else:
+                parsererr("Illegal instruction '" + str(tokens[idx]) + "'", curstep, tokens, stepidx)
+                return False
+            
             # check for end of step
             if tokens[idx] != DOT:
                 parsererr("Missing '.' at end of instruction", curstep, tokens, stepidx)
@@ -301,7 +305,7 @@ def parse(tokens):
                         del numberedsteps[stepnum]
                         warning("Step " + nexpr2str(curstep) + " has replaced step " + str(stepnum))
         except IndexError:
-            parsererr("Unexpected end of program OR internal parser error", curstep, tokens, idx)
+            parsererr("Unexpected end of program OR internal parser error", curstep, tokens, stepidx)
             return False
     
     # reverse the order of the steps with expressions so that the last matching expression has precedence 
@@ -315,6 +319,13 @@ def nexpr2str(nexpr):
     elif nexpr[1] == 0:  return "%dn" % nexpr[0]
     elif nexpr[0] == 1:  return "n + %d" % nexpr[1]
     else:  return "%dn + %d" % nexpr
+
+# Convert any expression to a string.
+def expr2str(expr):
+    if isNexpr(expr):
+        return nexpr2str(expr)
+    else:
+        return str(expr)
 
 # Returns true if stepnum matches the "n"-expression an + b for some positive n.
 def matchNexpression(stepnum, nexpr):
@@ -443,6 +454,11 @@ def printinstruction(instr):
 
 # MAIN program
 
+# Exit constants
+EXIT_OK = 0
+EXIT_TOKEN_ERR = 3
+EXIT_PARSE_ERR = 4
+
 # set up commandline argument handling
 parser = argparse.ArgumentParser(description="An interpreter for the language SMETANA To Infinity!")
 parser.add_argument("program", help="filename of the STI program to run")
@@ -454,12 +470,15 @@ outgrp.add_argument("-i", "--integers", help="output integers (default)", dest='
 outgrp.add_argument("-u", "--unicode", help="output Unicode characters", dest='outformat', action='store_const', const=outUNICODE, default=outINTEGER)
 args = parser.parse_args()
 
+# read program file and tokenize it one line at a time
 f = open(args.program)
 try:
     linenum = 1
     alltokens = []
     for line in f:
         tokens = tokenize(line, linenum)
+        if not tokens and type(tokens) is bool:
+            sys.exit(EXIT_TOKEN_ERR)
         # print tokens
         # The spec does not restrict where newlines can appear so we allow
         # steps to cross line boundaries and multiple steps per line.
@@ -470,7 +489,13 @@ try:
 finally:
     f.close()
 
+# parse tokens and "compile" program
 program = parse(alltokens)
+if not program and type(program) is bool:
+    sys.stderr.flush()
+    sys.exit(EXIT_PARSE_ERR)
 # print program
 
+# run the program with the specified options
 execute(program, args.outformat, args.start, args.trace)
+sys.exit(EXIT_OK)
