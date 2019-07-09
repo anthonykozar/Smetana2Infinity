@@ -2,8 +2,8 @@
 # Finds primes up to 100.
 
 # Steps 2-100 represent the positive integers to test.
-# A step is changed to a NOP after it has been identified as a 
-# prime or ruled out as composite.
+# A step is changed to a NOP after it has been ruled out
+# as composite.
 Step n. Go to step 10000n.
 
 # Start search with step 2.
@@ -13,16 +13,15 @@ Step 1. Swap step 1 with step 1.
 Step n + 100. Swap step 1 with step 1.
 
 # All steps 10000+ not explicitly defined below are also NOPs.
-Step n + 10000. Swap step n + 10000 with step n + 10000.
+Step n + 10000. Swap step 1 with step 1.
 
 # A 10000n to 10000n+101 block is called when n is found to be prime.
 # To keep multiple step number expressions from evaluating to the same
 # n, these blocks must be spaced at least every MAX^2 steps where MAX
 # is the largest number to be checked for primeness.
 
-# First output the number and change step n to a NOP.
+# First output the number.
 Step 10000n. Output character n.
-Step 10000n + 1. Swap step n with step n + 100.
 
 # Multiples of step n are composite, so change them to NOPs.
 # Some steps between 2-100 will be swapped multiple times, so
