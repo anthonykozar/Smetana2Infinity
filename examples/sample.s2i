@@ -1,0 +1,8 @@
+# Sample program from ReadMe.txt
+# Counts from 1 to 3 then back to 1.
+
+Step n. Output character n.
+Step 4. Swap step 1 with step 2.
+Step 5. Swap step 3 with step 7.
+Step 6. Go to step 1.
+Step 7. Stop.
