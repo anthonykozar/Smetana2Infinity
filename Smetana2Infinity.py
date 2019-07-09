@@ -427,16 +427,14 @@ def execute(program, outformat = outINTEGER, startstep = 1, trace = False):
                 print instr[ARG1]
             elif outformat == outASCII:
                 if instr[ARG1] >= 0 and instr[ARG1] <= 127:
-                    print chr(instr[ARG1]),
+                    sys.stdout.write(chr(instr[ARG1]))
                 else:
-                    print
-                    warning("ASCII char value %d out of range.\n" % instr[ARG1])
+                    warning("ASCII char value %d out of range." % instr[ARG1])
             elif outformat == outUNICODE:
                 if instr[ARG1] >= 0 and instr[ARG1] <= 65534:
-                    print unichr(instr[ARG1]),
+                    sys.stdout.write(unichr(instr[ARG1]))
                 else:
-                    print
-                    warning("Unicode char value %d out of range.\n" % instr[ARG1])
+                    warning("Unicode char value %d out of range." % instr[ARG1])
             curstep += 1
         
     return curstep
