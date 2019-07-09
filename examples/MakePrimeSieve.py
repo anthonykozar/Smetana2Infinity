@@ -1,4 +1,4 @@
-#!/usr/local/bin/python2
+#!/usr/bin/env python
 
 # MakePrimeSieve.py
 
@@ -10,7 +10,6 @@
 # Part of the Smetana2Infinity.py distribution available from
 # https://github.com/anthonykozar/Smetana2Infinity
 
-# Implemented by
 # Anthony Kozar
 # July 8, 2019
 
