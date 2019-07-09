@@ -1,0 +1,9 @@
+# Test for ASCII and Unicode warnings
+# Use -a or -u flag when running.
+
+Step 2n. Output character 2n.
+Step 2n + 1. Go to step 4n.
+
+Step 1. Go to step 32.
+Step 131072. Output character 10.
+Step 131073. Stop.
